@@ -2,9 +2,9 @@ import Container from "@/components/Container";
 import { Button } from "@/components/ui/button";
 import { Phone, MapPin } from "lucide-react";
 
-const PHONE = "+919848666600";
-const WHATSAPP = "919848666600";
-const MAPS_URL = "https://www.google.com/maps/place/Mohans+Motors/@17.441004,78.4520748,17z";
+const PHONE = "+919848015809";
+const WHATSAPP = "919848015809";
+const MAPS_URL = "https://www.google.com/maps/place/National+Motors+Ameerpet/@17.4312794,78.4472248,17z/data=!3m1!4b1!4m6!3m5!1s0x3bcb90ca2c62b629:0x9193e5bad699b0a0!8m2!3d17.4312743!4d78.4497997!16s%2Fg%2F12hm75vj1!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D";
 
 const LocationCTASection = () => {
   return (

@@ -7,7 +7,7 @@ export const BUSINESS_NAMES = {
   2: "HM'ZAH Cars",
   3: "Shree Vaishnavi Cars",
   4: "Harsha Cars",
-  5: "Mohan's Motors",
+  5: "National Motors",
 } as const;
 
 export type BusinessKey = keyof typeof BUSINESS_NAMES;

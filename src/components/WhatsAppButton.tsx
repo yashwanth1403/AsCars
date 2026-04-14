@@ -6,7 +6,7 @@
 
 import { BUSINESS_NAME } from "@/config/business";
 
-const WHATSAPP_NUMBER = "919848666600"; // Mohan's Motors number
+const WHATSAPP_NUMBER = "919848015809"; // National Motors number
 const WHATSAPP_MESSAGE = encodeURIComponent(
   `Hello! I'm interested in a car from ${BUSINESS_NAME}.`
 );

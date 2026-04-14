@@ -17,9 +17,9 @@ const Footer = () => {
               className="h-12 lg:h-16 w-auto object-contain bg-white rounded p-2" 
             />
             <p className="text-sm opacity-75">
-              7-1-46, Dharam Karan Road, Ameerpet, Hyderabad - 500016
+              Opp. Big Bazar Lane, Ameerpet, Hyderabad. T.S
               <br />
-              A Multibrand Pre-owned Cars Outlet.
+              We Sell, Purchase & Exchange Any Car at Your Door Step More Than Market Price
             </p>
           </div>
 
@@ -54,8 +54,8 @@ const Footer = () => {
               Contact
             </h3>
             <ul className="space-y-2 text-sm opacity-75">
-              <li>📞 +91 98486 66600</li>
-              <li>📧 info@mohansmotors.com</li>
+              <li>📞 +91 98480 15809</li>
+              <li>📧 info@nationalmotors.in</li>
               <li>📍 Ameerpet, Hyderabad - 500016</li>
             </ul>
           </div>

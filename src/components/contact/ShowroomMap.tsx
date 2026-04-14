@@ -18,7 +18,7 @@ export const ShowroomMap = () => {
         <div className="w-full h-[300px] sm:h-[400px] bg-muted rounded-xl mb-6 relative overflow-hidden group">
           {/* Using a placeholder static map image or an iframe */}
           <iframe
-            src="https://maps.google.com/maps?q=Mohans%20Motors,%20Ameerpet,%20Hyderabad&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            src="https://maps.google.com/maps?q=National%20Motors,%20Ameerpet,%20Hyderabad&t=&z=15&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="100%"
             style={{ border: 0 }}

@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: "Contact", to: "/contact" },
 ];
 
-const PHONE = "+919848666600"; // Mohan's Motors contact
+const PHONE = "+919848015809"; // National Motors contact
 
 /**
  * Navbar – transparent at top, solid primary on scroll.
