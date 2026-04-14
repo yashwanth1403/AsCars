@@ -1,18 +1,14 @@
-/**
- * Business name configuration.
- * Switch ACTIVE_BUSINESS to change the displayed brand.
- */
-export const BUSINESS_NAMES = {
-  1: "Kohinoor Cars",
-  2: "HM'ZAH Cars",
-  3: "Shree Vaishnavi Cars",
-  4: "Harsha Cars",
-  5: "National Motors",
-} as const;
+export const BUSINESS_NAME = "AS Cars";
 
-export type BusinessKey = keyof typeof BUSINESS_NAMES;
+export const PHONE_E164 = "+919392583393";
+export const PHONE_DISPLAY = "09392583393";
+export const WHATSAPP_NUMBER = "919392583393";
 
-export const ACTIVE_BUSINESS: BusinessKey = 5;
+export const BUSINESS_ADDRESS =
+  "hitech city, Gopal nagar, Hafeezpet Rd, near masjid-e-Ghousia, Hyderabad, Telangana 500085";
 
-/** Active business name – use across the app */
-export const BUSINESS_NAME = BUSINESS_NAMES[ACTIVE_BUSINESS];
+export const MAPS_URL =
+  "https://www.google.com/maps/place/AS+cars/@17.4816288,78.3736444,17z/data=!4m15!1m8!3m7!1s0x3bcb915ae924ef8d:0xa7b87c0ef78629a!2sAS+cars!8m2!3d17.4813979!4d78.3735745!10e5!16s%2Fg%2F11nxg0fvvz!3m5!1s0x3bcb915ae924ef8d:0xa7b87c0ef78629a!8m2!3d17.4813979!4d78.3735745!16s%2Fg%2F11nxg0fvvz!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D";
+
+export const MAP_EMBED_URL =
+  "https://maps.google.com/maps?q=AS%20cars,%20hitech%20city,%20Hyderabad&t=&z=16&ie=UTF8&iwloc=&output=embed";

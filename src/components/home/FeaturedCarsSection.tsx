@@ -3,10 +3,9 @@ import Container from "@/components/Container";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { WHATSAPP_NUMBER } from "@/config/business";
 
 import { CARS, formatPrice } from "@/data/cars";
-
-const WHATSAPP_NUMBER = "919848015809";
 
 const FeaturedCarsSection = () => {
   return (

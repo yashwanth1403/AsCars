@@ -1,6 +1,6 @@
 import React from "react";
 import { Clock, MapPin } from "lucide-react";
-import { BUSINESS_NAME } from "@/config/business";
+import { BUSINESS_ADDRESS, BUSINESS_NAME, MAP_EMBED_URL } from "@/config/business";
 
 export const ShowroomMap = () => {
   return (
@@ -18,7 +18,7 @@ export const ShowroomMap = () => {
         <div className="w-full h-[300px] sm:h-[400px] bg-muted rounded-xl mb-6 relative overflow-hidden group">
           {/* Using a placeholder static map image or an iframe */}
           <iframe
-            src="https://maps.google.com/maps?q=National%20Motors,%20Ameerpet,%20Hyderabad&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            src={MAP_EMBED_URL}
             width="100%"
             height="100%"
             style={{ border: 0 }}
@@ -42,11 +42,7 @@ export const ShowroomMap = () => {
                 Showroom Address
               </h3>
               <p className="text-muted-foreground text-sm font-medium leading-relaxed">
-                7-1-46, Dharam Karan Road, Opposite Rationwala Super Market,
-                <br />
-                Near Challa Hospital,
-                <br />
-                Ameerpet, Hyderabad, Telangana - 500016
+                {BUSINESS_ADDRESS}
               </p>
             </div>
           </div>

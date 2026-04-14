@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Mohan's Motors – Design System
+/* AS Cars – Design System
    All colors MUST be HSL.
-   Primary:   Navy Blue  hsl(223, 58%, 18%)
-   Secondary: Burgundy   hsl(346, 64%, 28%)
-   Neutral bg: Light gray hsl(210, 20%, 97%)
-   Text:       Dark gray  hsl(215, 25%, 15%)
+   Primary:   Graphite   hsl(222, 29%, 12%)
+   Secondary: Crimson    hsl(356, 76%, 46%)
+   Neutral bg: Light gray hsl(220, 18%, 96%)
+   Text:       Charcoal  hsl(222, 20%, 12%)
    Spacing: 8px scale | Max width: 1200px | Mobile padding: 16px
 */
 
@@ -15,42 +15,42 @@
   :root {
     /* Brand */
     --brand-gold:             43 74% 49%;
-    --brand-primary:          223 58% 18%;
-    --brand-primary-light:    223 50% 30%;
-    --brand-primary-dark:     223 60% 10%;
-    --brand-secondary:        346 64% 28%;
-    --brand-secondary-dark:   346 64% 18%;
+    --brand-primary:          222 29% 12%;
+    --brand-primary-light:    222 22% 22%;
+    --brand-primary-dark:     222 36% 8%;
+    --brand-secondary:        356 76% 46%;
+    --brand-secondary-dark:   356 76% 36%;
 
     /* Surfaces */
-    --background:             210 20% 97%;
-    --foreground:             215 25% 15%;
+    --background:             220 18% 96%;
+    --foreground:             222 20% 12%;
     --card:                   0 0% 100%;
-    --card-foreground:        215 25% 15%;
+    --card-foreground:        222 20% 12%;
     --popover:                0 0% 100%;
-    --popover-foreground:     215 25% 15%;
+    --popover-foreground:     222 20% 12%;
 
     /* Components */
-    --primary:                223 58% 18%;
+    --primary:                222 29% 12%;
     --primary-foreground:     0 0% 100%;
-    --secondary:              346 64% 28%;
+    --secondary:              356 76% 46%;
     --secondary-foreground:   0 0% 100%;
-    --muted:                  210 15% 93%;
-    --muted-foreground:       215 15% 45%;
-    --accent:                 346 64% 28%;
+    --muted:                  218 14% 92%;
+    --muted-foreground:       222 10% 40%;
+    --accent:                 356 76% 46%;
     --accent-foreground:      0 0% 100%;
     --destructive:            0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     /* Borders / Inputs */
-    --border:                 214 20% 88%;
-    --input:                  214 20% 88%;
-    --ring:                   223 58% 18%;
+    --border:                 216 16% 85%;
+    --input:                  216 16% 85%;
+    --ring:                   356 76% 46%;
 
     --radius:                 0.5rem;
 
     /* Navbar */
     --navbar-transparent:     0 0% 0% / 0;
-    --navbar-solid:           223 58% 18%;
+    --navbar-solid:           222 29% 12%;
 
     /* Sidebar (keep for shadcn compatibility) */
     --sidebar-background:     0 0% 98%;

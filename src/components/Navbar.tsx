@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { BUSINESS_NAME } from "../config/business";
+import { BUSINESS_NAME, PHONE_E164 } from "../config/business";
 import Container from "./Container";
 
 const NAV_LINKS = [
@@ -10,8 +10,6 @@ const NAV_LINKS = [
   { label: "Testimonials", to: "/testimonials" },
   { label: "Contact", to: "/contact" },
 ];
-
-const PHONE = "+919848015809"; // National Motors contact
 
 /**
  * Navbar – transparent at top, solid primary on scroll.
@@ -75,18 +73,26 @@ const Navbar = () => {
         ].join(" ")}
       >
         <Container>
-          <nav className="flex h-16 items-center justify-between">
+          <nav className="flex h-20 items-center justify-between">
             {/* Logo */}
             <Link
               to="/"
-              className="flex items-center gap-2"
+              className="flex items-center gap-2.5 shrink-0"
               onClick={closeMenu}
             >
               <img 
                 src="/logo.png" 
                 alt={BUSINESS_NAME} 
-                className="h-10 sm:h-12 w-auto object-contain bg-white rounded p-1 shadow-sm transition-transform hover:scale-105" 
+                className="h-14 sm:h-16 w-auto object-contain bg-white rounded-md p-1 shadow-md ring-1 ring-black/10 transition-transform hover:scale-105" 
               />
+              <span
+                className={[
+                  "text-base sm:text-lg font-extrabold tracking-wide leading-none",
+                  scrolled ? "text-primary-foreground" : "text-foreground",
+                ].join(" ")}
+              >
+                AS CARS
+              </span>
             </Link>
 
             {/* Desktop nav */}
@@ -103,7 +109,7 @@ const Navbar = () => {
 
               {/* Call CTA */}
               <a
-                href={`tel:${PHONE}`}
+                href={`tel:${PHONE_E164}`}
                 className="ml-2 rounded-full bg-secondary px-4 py-1.5 text-sm font-semibold text-secondary-foreground shadow transition-transform hover:scale-105 active:scale-95"
               >
                 📞 Call Now
@@ -185,7 +191,7 @@ const Navbar = () => {
 
           {/* Call CTA */}
           <a
-            href={`tel:${PHONE}`}
+            href={`tel:${PHONE_E164}`}
             onClick={closeMenu}
             className="mt-10 rounded-full bg-secondary py-3 text-center text-sm font-bold text-secondary-foreground shadow-lg"
           >

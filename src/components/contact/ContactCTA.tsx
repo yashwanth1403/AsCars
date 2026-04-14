@@ -1,5 +1,6 @@
 import React from "react";
 import { PhoneCall } from "lucide-react";
+import { PHONE_E164, WHATSAPP_NUMBER } from "@/config/business";
 
 export const ContactCTA = () => {
   return (
@@ -19,14 +20,14 @@ export const ContactCTA = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center max-w-md mx-auto">
           <a
-            href="tel:+919848015809"
+            href={`tel:${PHONE_E164}`}
             className="flex-1 bg-white hover:bg-white/90 text-primary flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-extrabold transition-all shadow-md hover:shadow-lg hover:-translate-y-1"
           >
             <PhoneCall size={20} />
             Call Now
           </a>
           <a
-            href="https://wa.me/919848015809"
+            href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-extrabold transition-all shadow-md hover:shadow-lg hover:-translate-y-1"

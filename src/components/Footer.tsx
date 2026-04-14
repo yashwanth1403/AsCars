@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BUSINESS_NAME } from "../config/business";
+import { BUSINESS_ADDRESS, BUSINESS_NAME, PHONE_DISPLAY } from "../config/business";
 import Container from "./Container";
 
 const Footer = () => {
@@ -16,11 +16,7 @@ const Footer = () => {
               alt={BUSINESS_NAME} 
               className="h-12 lg:h-16 w-auto object-contain bg-white rounded p-2" 
             />
-            <p className="text-sm opacity-75">
-              Opp. Big Bazar Lane, Ameerpet, Hyderabad. T.S
-              <br />
-              We Sell, Purchase & Exchange Any Car at Your Door Step More Than Market Price
-            </p>
+            <p className="text-sm opacity-75">{BUSINESS_ADDRESS}</p>
           </div>
 
           {/* Quick Links */}
@@ -54,9 +50,8 @@ const Footer = () => {
               Contact
             </h3>
             <ul className="space-y-2 text-sm opacity-75">
-              <li>📞 +91 98480 15809</li>
-              <li>📧 info@nationalmotors.in</li>
-              <li>📍 Ameerpet, Hyderabad - 500016</li>
+              <li>📞 {PHONE_DISPLAY}</li>
+              <li>📍 {BUSINESS_ADDRESS}</li>
             </ul>
           </div>
         </div>

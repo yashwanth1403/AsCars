@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
-import { BUSINESS_NAME } from "@/config/business";
+import { BUSINESS_NAME, WHATSAPP_NUMBER } from "@/config/business";
 import Container from "@/components/Container";
 import { Button } from "@/components/ui/button";
-
-const WHATSAPP_NUMBER = "919848015809";
 const WHATSAPP_MSG = encodeURIComponent("Hello! I saw your customer reviews and I'm interested in buying a car.");
 
 const TestimonialsCTA = () => (

@@ -4,9 +4,7 @@
  * TODO Phase 2: Replace WHATSAPP_NUMBER with real number.
  */
 
-import { BUSINESS_NAME } from "@/config/business";
-
-const WHATSAPP_NUMBER = "919848015809"; // National Motors number
+import { BUSINESS_NAME, WHATSAPP_NUMBER } from "@/config/business";
 const WHATSAPP_MESSAGE = encodeURIComponent(
   `Hello! I'm interested in a car from ${BUSINESS_NAME}.`
 );

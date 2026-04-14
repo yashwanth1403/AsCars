@@ -1,6 +1,7 @@
 import Container from "@/components/Container";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { WHATSAPP_NUMBER } from "@/config/business";
 
 const FinanceSection = () => {
   return (
@@ -28,7 +29,7 @@ const FinanceSection = () => {
               className="bg-secondary text-secondary-foreground hover:bg-secondary-dark w-full sm:w-auto text-base px-8 shrink-0"
               onClick={() =>
                 window.open(
-                  `https://wa.me/919848015809?text=${encodeURIComponent("Hi, I want to check my EMI eligibility.")}`,
+                  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi, I want to check my EMI eligibility.")}`,
                   "_blank",
                 )
               }

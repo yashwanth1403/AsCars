@@ -10,7 +10,7 @@ const HeroSection = () => {
           A Multibrand Pre-owned Cars Outlet
         </h1>
         <p className="text-lg text-primary-foreground/75 max-w-2xl font-medium tracking-wide">
-          Buy • Sell • Exchange • Park & Sell • Finance • Insurance
+          Buy • Sell • Exchange • Finance • Insurance
         </p>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2">
           <Button

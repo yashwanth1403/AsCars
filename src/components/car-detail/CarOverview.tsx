@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { formatPrice, formatKm } from "@/data/cars";
 import React from "react";
+import { PHONE_E164, WHATSAPP_NUMBER } from "@/config/business";
 
 interface CarOverviewProps {
   car: {
@@ -24,7 +25,6 @@ interface CarOverviewProps {
 }
 
 export const CarOverview = ({ car }: CarOverviewProps) => {
-  const WHATSAPP_NUMBER = "919876543210";
   const waMessage = encodeURIComponent(
     `Hi, I'm interested in ${car.name} (${car.year}) priced at ${formatPrice(car.price)}. Is it still available?`,
   );
@@ -39,7 +39,7 @@ export const CarOverview = ({ car }: CarOverviewProps) => {
             {car.name}
           </h1>
           <p className="text-muted-foreground text-xs sm:text-sm mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium">
-            <MapPin size={14} className="text-primary" /> Ameerpet, Hyderabad
+            <MapPin size={14} className="text-primary" /> Hyderabad
           </p>
         </div>
         <div className="flex gap-2">
@@ -85,7 +85,7 @@ export const CarOverview = ({ car }: CarOverviewProps) => {
           WhatsApp Dealer
         </a>
         <a
-          href="tel:+919876543210"
+          href={`tel:${PHONE_E164}`}
           className="flex-1 bg-secondary hover:bg-secondary/90 text-secondary-foreground flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-sm font-bold transition-colors shadow-sm"
         >
           <PhoneCall size={18} />
