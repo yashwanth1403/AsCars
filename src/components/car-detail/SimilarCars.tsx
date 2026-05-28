@@ -1,10 +1,16 @@
 import React from "react";
 import CarCard from "@/components/cars/CarCard";
-import { CARS } from "@/data/cars";
+import { useQuery } from "@tanstack/react-query";
+import { fetchPublicCars } from "@/lib/supabase/cars";
+import { toCarCard } from "@/lib/supabase/mappers";
+import PageLoader from "@/components/loaders/PageLoader";
 
 export const SimilarCars = () => {
-  // Extracting first 4 cars as placeholder recommendations
-  const recommendedCars = CARS.slice(0, 4);
+  const { data, isLoading } = useQuery({
+    queryKey: ["similar-cars"],
+    queryFn: fetchPublicCars,
+  });
+  const recommendedCars = (data ?? []).map(toCarCard).slice(0, 4);
 
   return (
     <div className="py-6 sm:py-8 mt-4 border-t border-border/60">
@@ -17,11 +23,15 @@ export const SimilarCars = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        {recommendedCars.map((car) => (
-          <CarCard key={car.id} car={car} />
-        ))}
-      </div>
+      {isLoading ? (
+        <PageLoader label="Loading similar cars..." />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {recommendedCars.map((car) => (
+            <CarCard key={car.id} car={car} />
+          ))}
+        </div>
+      )}
 
       <button className="w-full mt-6 py-3.5 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary/5 transition-colors sm:hidden">
         View All Inventory

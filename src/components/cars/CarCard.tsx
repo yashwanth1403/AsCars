@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Car, formatPrice, formatKm } from "@/data/cars";
+import { OfferPricing, OfferRibbon } from "@/components/offers/OfferDisplay";
 
 const WHATSAPP_NUMBER = "919876543210";
 
@@ -16,7 +17,11 @@ interface CarCardProps {
 
 const CarCard = ({ car }: CarCardProps) => {
   const waMessage = encodeURIComponent(
-    `Hi, I'm interested in ${car.name} (${car.year}) priced at ${formatPrice(car.price)}. Is it still available?`,
+    `Hi, I'm interested in ${car.name} (${car.year})${
+      car.offer
+        ? ` — special offer at ${formatPrice(car.offer.offerPrice)} (${car.offer.discountPercent}% off)`
+        : ` priced at ${formatPrice(car.price)}`
+    }. Is it still available?`,
   );
   const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`;
 
@@ -45,10 +50,13 @@ const CarCard = ({ car }: CarCardProps) => {
           </div>
         )}
 
-        {/* EMI badge */}
-        <div className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs font-semibold px-2 py-1 rounded-full">
-          EMI ₹{car.emi.toLocaleString("en-IN")}/mo
-        </div>
+        {car.offer && <OfferRibbon offer={car.offer} />}
+
+        {car.financePercent != null && car.financePercent > 0 && (
+          <div className="absolute top-3 left-3 rounded-full bg-secondary px-2.5 py-1 text-xs font-bold text-secondary-foreground shadow-sm">
+            {car.financePercent}% Finance
+          </div>
+        )}
       </div>
 
       {/* Body */}
@@ -71,10 +79,16 @@ const CarCard = ({ car }: CarCardProps) => {
 
         {/* Price */}
         <div className="mt-auto pt-2 border-t border-border">
-          <p className="text-2xl font-extrabold text-primary tracking-tight">
-            {formatPrice(car.price)}
-          </p>
-          <p className="text-xs text-muted-foreground">All-inclusive price</p>
+          {car.offer ? (
+            <OfferPricing offer={car.offer} size="sm" />
+          ) : (
+            <>
+              <p className="text-2xl font-extrabold text-primary tracking-tight">
+                {formatPrice(car.price)}
+              </p>
+              <p className="text-xs text-muted-foreground">All-inclusive price</p>
+            </>
+          )}
         </div>
 
         {/* CTAs */}

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Send } from "lucide-react";
+import { createLead } from "@/lib/supabase/leads";
+import { useToast } from "@/hooks/use-toast";
 
 export const ContactForm = () => {
+  const { toast } = useToast();
+  const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -21,10 +25,31 @@ export const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Contact Form Submitted:", formData);
-    alert("Message sent! We'll get back to you shortly.");
+    setSubmitting(true);
+    try {
+      await createLead({
+        carid: null,
+        source: "contact",
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email || null,
+        subject: formData.subject,
+        message: formData.message,
+        payload: null,
+      });
+      toast({ title: "Message sent", description: "We will contact you shortly." });
+    } catch (error) {
+      toast({
+        title: "Submission failed",
+        description: error instanceof Error ? error.message : "Please try again.",
+        variant: "destructive",
+      });
+      return;
+    } finally {
+      setSubmitting(false);
+    }
     setFormData({
       name: "",
       phone: "",
@@ -152,10 +177,11 @@ export const ContactForm = () => {
           {/* Submit */}
           <button
             type="submit"
+            disabled={submitting}
             className="w-full flex items-center justify-center gap-2 h-12 bg-primary hover:bg-primary-dark text-primary-foreground rounded-lg font-bold transition-colors mt-2"
           >
             <Send size={18} />
-            Send Message
+            {submitting ? "Sending..." : "Send Message"}
           </button>
         </form>
       </div>

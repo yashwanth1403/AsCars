@@ -50,7 +50,7 @@ const Navbar = () => {
   const desktopActiveClass = ({ isActive }: { isActive: boolean }) => {
     if (scrolled) {
       return isActive
-        ? "text-secondary font-semibold border-b-2 border-secondary pb-0.5"
+        ? "text-accent font-semibold border-b-2 border-accent pb-0.5"
         : "text-primary-foreground opacity-80 hover:opacity-100 transition-opacity";
     }
     return isActive
@@ -60,7 +60,7 @@ const Navbar = () => {
 
   const mobileActiveClass = ({ isActive }: { isActive: boolean }) =>
     isActive
-      ? "text-secondary font-semibold"
+      ? "text-accent font-semibold"
       : "text-primary-foreground opacity-80 hover:opacity-100 transition-opacity";
 
   return (
@@ -110,7 +110,7 @@ const Navbar = () => {
               {/* Call CTA */}
               <a
                 href={`tel:${PHONE_E164}`}
-                className="ml-2 rounded-full bg-secondary px-4 py-1.5 text-sm font-semibold text-secondary-foreground shadow transition-transform hover:scale-105 active:scale-95"
+                className="ml-2 rounded-full bg-secondary px-4 py-1.5 text-sm font-bold text-secondary-foreground shadow-md transition-all hover:bg-secondary-dark hover:shadow-lg hover:scale-105 active:scale-95"
               >
                 📞 Call Now
               </a>

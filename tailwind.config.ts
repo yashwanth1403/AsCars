@@ -31,6 +31,9 @@ export default {
           dark: "hsl(var(--brand-secondary-dark))",
         },
         gold: "hsl(var(--brand-gold))",
+        "gold-light": "hsl(var(--brand-gold-light))",
+        "gold-dark": "hsl(var(--brand-gold-dark))",
+        trust: "hsl(var(--brand-trust))",
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",

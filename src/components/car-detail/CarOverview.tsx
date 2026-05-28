@@ -11,6 +11,10 @@ import {
 import { formatPrice, formatKm } from "@/data/cars";
 import React from "react";
 import { PHONE_E164, WHATSAPP_NUMBER } from "@/config/business";
+import { createLead } from "@/lib/supabase/leads";
+import { useToast } from "@/hooks/use-toast";
+import type { CarOffer } from "@/data/cars";
+import { OfferPricing } from "@/components/offers/OfferDisplay";
 
 interface CarOverviewProps {
   car: {
@@ -21,14 +25,43 @@ interface CarOverviewProps {
     fuel: string;
     transmission: string;
     owner: string;
+    financePercent?: number | null;
+    offer?: CarOffer | null;
+    id?: string;
   };
 }
 
 export const CarOverview = ({ car }: CarOverviewProps) => {
+  const { toast } = useToast();
+  const displayPrice = car.offer?.offerPrice ?? car.price;
   const waMessage = encodeURIComponent(
-    `Hi, I'm interested in ${car.name} (${car.year}) priced at ${formatPrice(car.price)}. Is it still available?`,
+    `Hi, I'm interested in ${car.name} (${car.year})${
+      car.offer
+        ? ` — special offer at ${formatPrice(car.offer.offerPrice)} (${car.offer.discountPercent}% off)`
+        : ` priced at ${formatPrice(car.price)}`
+    }. Is it still available?`,
   );
   const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`;
+  const handleTrackLead = async () => {
+    try {
+      await createLead({
+        carid: car.id || null,
+        source: "cardetail",
+        name: "Website WhatsApp Lead",
+        phone: "0000000000",
+        email: null,
+        subject: car.name,
+        message: "Interest captured from car detail CTA",
+        payload: { cta: "whatsapp", year: car.year, price: displayPrice, offer: car.offer?.title },
+      });
+    } catch {
+      toast({
+        title: "Lead tracking failed",
+        description: "Car inquiry still opens WhatsApp, but lead was not recorded.",
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <div className="bg-card rounded-xl border border-border p-4 sm:p-6 shadow-sm flex flex-col gap-4 sm:gap-6">
@@ -54,12 +87,23 @@ export const CarOverview = ({ car }: CarOverviewProps) => {
 
       {/* Price Section */}
       <div>
-        <h2 className="text-3xl sm:text-5xl font-extrabold text-primary tracking-tight">
-          {formatPrice(car.price)}
-        </h2>
-        <p className="text-xs sm:text-sm text-muted-foreground mt-1 sm:mt-1.5 font-medium">
-          Fixed price, inclusive of all taxes
-        </p>
+        {car.offer ? (
+          <OfferPricing offer={car.offer} size="lg" />
+        ) : (
+          <>
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-primary tracking-tight">
+              {formatPrice(car.price)}
+            </h2>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1 sm:mt-1.5 font-medium">
+              Fixed price, inclusive of all taxes
+            </p>
+          </>
+        )}
+        {car.financePercent != null && car.financePercent > 0 && (
+          <p className="mt-2 inline-flex items-center rounded-full bg-secondary/15 px-3 py-1 text-xs font-bold text-secondary">
+            Up to {car.financePercent}% finance available
+          </p>
+        )}
       </div>
 
       {/* Key Specs Chips */}
@@ -79,6 +123,7 @@ export const CarOverview = ({ car }: CarOverviewProps) => {
           href={waLink}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => void handleTrackLead()}
           className="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-sm font-bold transition-colors shadow-sm"
         >
           <img src="/whatsapp-color-svgrepo-com.svg" alt="" className="h-5 w-5 invert brightness-0" aria-hidden />

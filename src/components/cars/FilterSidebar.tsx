@@ -54,7 +54,7 @@ export const FilterPanel = ({
         <div className="flex items-center gap-2">
           <button
             onClick={onClear}
-            className="text-xs text-secondary font-semibold hover:underline"
+            className="text-xs text-accent font-semibold hover:underline"
           >
             Clear All
           </button>
@@ -190,8 +190,8 @@ const ChipGroup = ({
         onClick={() => onChange(opt)}
         className={`px-3 h-8 rounded-full text-xs font-medium border transition-colors ${
           value === opt
-            ? "bg-primary text-primary-foreground border-primary"
-            : "bg-background text-foreground border-border hover:border-primary hover:text-primary"
+            ? "bg-secondary text-secondary-foreground border-secondary shadow-sm"
+            : "bg-background text-foreground border-border hover:border-accent/50 hover:text-accent"
         }`}
       >
         {opt}

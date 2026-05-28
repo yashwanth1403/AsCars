@@ -12,20 +12,20 @@ export const CarGallery = ({ images }: CarGalleryProps) => {
   const prevImage = () =>
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
 
-  // Fallback to placeholder images if none provided
-  const displayImages =
-    images.length > 0
-      ? images
-      : [
-          "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=1600",
-          "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1600",
-          "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&q=80&w=1600",
-        ];
+  const displayImages = images;
+
+  if (displayImages.length === 0) {
+    return (
+      <div className="aspect-video sm:aspect-[16/9] w-full rounded-xl border border-border bg-muted flex items-center justify-center">
+        <p className="text-sm text-muted-foreground">No images uploaded for this car yet.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-3">
       {/* Main Image Container */}
-      <div className="relative aspect-video sm:aspect-[16/9] w-full bg-muted rounded-xl overflow-hidden group shadow-sm bg-black/5">
+      <div className="relative aspect-video sm:aspect-[16/9] w-full rounded-xl overflow-hidden group shadow-sm bg-black/5">
         <img
           src={displayImages[currentIndex]}
           alt={`Car view ${currentIndex + 1}`}

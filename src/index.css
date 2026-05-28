@@ -4,47 +4,50 @@
 
 /* AS Cars – Design System
    All colors MUST be HSL.
-   Primary:   Graphite   hsl(222, 29%, 12%)
-   Secondary: Crimson    hsl(356, 76%, 46%)
-   Neutral bg: Light gray hsl(220, 18%, 96%)
-   Text:       Charcoal  hsl(222, 20%, 12%)
-   Spacing: 8px scale | Max width: 1200px | Mobile padding: 16px
+   Primary:   Graphite      hsl(222, 29%, 12%)  — premium, stable
+   Secondary: Antique Gold  hsl(42, 38%, 52%)   — muted luxury gold (CTAs)
+   Accent:    Slate Blue    hsl(210, 25%, 45%)  — trust, focus (understated)
+   Neutral bg: Warm ivory    hsl(38, 22%, 96%)
+   Text:       Charcoal      hsl(222, 20%, 12%)
 */
 
 @layer base {
   :root {
     /* Brand */
-    --brand-gold:             43 74% 49%;
+    --brand-gold:             42 38% 52%;
+    --brand-gold-light:       43 28% 72%;
+    --brand-gold-dark:        42 35% 40%;
     --brand-primary:          222 29% 12%;
     --brand-primary-light:    222 22% 22%;
     --brand-primary-dark:     222 36% 8%;
-    --brand-secondary:        356 76% 46%;
-    --brand-secondary-dark:   356 76% 36%;
+    --brand-secondary:        42 38% 52%;
+    --brand-secondary-dark:   42 35% 40%;
+    --brand-trust:            210 25% 45%;
 
     /* Surfaces */
-    --background:             220 18% 96%;
+    --background:             38 22% 96%;
     --foreground:             222 20% 12%;
-    --card:                   0 0% 100%;
+    --card:                   38 30% 99%;
     --card-foreground:        222 20% 12%;
-    --popover:                0 0% 100%;
+    --popover:                38 30% 99%;
     --popover-foreground:     222 20% 12%;
 
-    /* Components */
+    /* Components — antique gold CTAs, slate focus */
     --primary:                222 29% 12%;
-    --primary-foreground:     0 0% 100%;
-    --secondary:              356 76% 46%;
-    --secondary-foreground:   0 0% 100%;
-    --muted:                  218 14% 92%;
-    --muted-foreground:       222 10% 40%;
-    --accent:                 356 76% 46%;
-    --accent-foreground:      0 0% 100%;
-    --destructive:            0 84% 60%;
+    --primary-foreground:     40 25% 98%;
+    --secondary:              42 38% 52%;
+    --secondary-foreground:   40 25% 98%;
+    --muted:                  38 16% 92%;
+    --muted-foreground:       222 10% 42%;
+    --accent:                 210 25% 45%;
+    --accent-foreground:      40 25% 98%;
+    --destructive:            0 65% 48%;
     --destructive-foreground: 0 0% 100%;
 
     /* Borders / Inputs */
-    --border:                 216 16% 85%;
-    --input:                  216 16% 85%;
-    --ring:                   356 76% 46%;
+    --border:                 38 12% 86%;
+    --input:                  38 12% 86%;
+    --ring:                   210 25% 45%;
 
     --radius:                 0.5rem;
 
@@ -70,12 +73,27 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  ::selection {
+    background: hsl(var(--brand-gold) / 0.28);
+    color: hsl(var(--foreground));
   }
 
   h1, h2, h3, h4, h5, h6 {
     color: hsl(var(--foreground));
+  }
+
+  /* Headings inside dark/primary surfaces inherit light text from parent */
+  .text-primary-foreground h1,
+  .text-primary-foreground h2,
+  .text-primary-foreground h3,
+  .text-primary-foreground h4,
+  .text-primary-foreground h5,
+  .text-primary-foreground h6 {
+    color: inherit;
   }
 }
 
@@ -108,5 +126,29 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes loadingbar {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(420%); }
+}
+
+@keyframes adminUploadBar {
+  0% { width: 0%; margin-left: 0%; }
+  50% { width: 70%; margin-left: 15%; }
+  100% { width: 0%; margin-left: 100%; }
+}
+
+@keyframes adminUploadPulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--secondary) / 0.3); }
+  50% { box-shadow: 0 0 0 4px hsl(var(--secondary) / 0.15); }
+}
+
+.admin-upload-bar {
+  animation: adminUploadBar 1.4s ease-in-out infinite;
+}
+
+.admin-upload-pulse {
+  animation: adminUploadPulse 1.5s ease-in-out infinite;
 }
 

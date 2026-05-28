@@ -4,10 +4,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { WHATSAPP_NUMBER } from "@/config/business";
-
-import { CARS, formatPrice } from "@/data/cars";
+import { formatPrice } from "@/data/cars";
+import { useQuery } from "@tanstack/react-query";
+import { fetchPublicCars } from "@/lib/supabase/cars";
+import { toCarCard } from "@/lib/supabase/mappers";
+import PageLoader from "@/components/loaders/PageLoader";
+import { OfferPricing, OfferRibbon } from "@/components/offers/OfferDisplay";
 
 const FeaturedCarsSection = () => {
+  const { data, isLoading } = useQuery({
+    queryKey: ["featured-cars"],
+    queryFn: fetchPublicCars,
+  });
+  const cars = (data ?? []).map(toCarCard).slice(0, 4);
+
   return (
     <section className="py-12 sm:py-16">
       <Container className="space-y-8">
@@ -18,28 +28,36 @@ const FeaturedCarsSection = () => {
           </p>
         </div>
 
+        {isLoading ? (
+          <PageLoader label="Loading featured cars..." />
+        ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {["6", "2", "3", "4"].map(id => CARS.find(c => c.id === id)).filter((car) => car !== undefined).map((car) => (
+          {cars.map((car) => (
             <Card key={car.id} className="overflow-hidden">
               <AspectRatio ratio={16 / 10}>
-                <div className="flex h-full w-full items-center justify-center bg-muted overflow-hidden">
+                <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-muted">
                   <img
                     src={car.image}
                     alt={car.name}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                   />
+                  {car.offer && <OfferRibbon offer={car.offer} />}
                 </div>
               </AspectRatio>
-              <CardContent className="p-4 space-y-3">
+              <CardContent className="space-y-3 p-4">
                 <div>
-                  <h3 className="font-semibold text-base">{car.name}</h3>
+                  <h3 className="text-base font-semibold">{car.name}</h3>
                   <p className="text-xs text-muted-foreground">
                     {car.year} · {car.km.toLocaleString("en-IN")} km · {car.fuel} · {car.transmission}
                   </p>
                 </div>
-                <p className="text-xl font-extrabold text-primary">
-                  {formatPrice(car.price)}
-                </p>
+                {car.offer ? (
+                  <OfferPricing offer={car.offer} size="sm" />
+                ) : (
+                  <p className="text-xl font-extrabold text-primary">
+                    {formatPrice(car.price)}
+                  </p>
+                )}
                 <div className="flex gap-2">
                   <Button
                     asChild
@@ -70,6 +88,7 @@ const FeaturedCarsSection = () => {
             </Card>
           ))}
         </div>
+        )}
 
         <div className="text-center pt-2">
           <Button asChild variant="secondary" size="lg">

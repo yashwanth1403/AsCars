@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { createLead } from "@/lib/supabase/leads";
 
 const BRANDS = ["Hyundai", "Maruti", "Honda", "Toyota", "Tata", "Kia", "Mahindra", "Renault", "Volkswagen", "Skoda", "MG", "Ford", "Other"];
 const YEARS = Array.from({ length: 15 }, (_, i) => String(new Date().getFullYear() - i));
@@ -71,12 +72,42 @@ const SellCarForm = () => {
     return Object.keys(e).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-    console.log("Sell Car Form Submission:", form);
-    setSubmitted(true);
-    toast({ title: "Submission received!", description: "Our team will contact you within 2 hours." });
+    setSubmitting(true);
+    try {
+      await createLead({
+        carid: null,
+        source: "sell",
+        name: form.name,
+        phone: form.phone,
+        email: null,
+        subject: "Sell my car",
+        message: `${form.brand} ${form.model} (${form.year})`,
+        payload: {
+          brand: form.brand,
+          model: form.model,
+          year: form.year,
+          km: form.km,
+          fuel: form.fuel,
+          transmission: form.transmission,
+          expectedPrice: form.expectedPrice || null,
+        },
+      });
+      setSubmitted(true);
+      toast({ title: "Submission received!", description: "Our team will contact you within 2 hours." });
+    } catch (error) {
+      toast({
+        title: "Submission failed",
+        description: error instanceof Error ? error.message : "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -209,8 +240,12 @@ const SellCarForm = () => {
               </label>
             </div>
 
-            <Button type="submit" className="w-full h-12 bg-secondary hover:bg-secondary-dark text-secondary-foreground font-bold text-base rounded-xl">
-              Get Free Evaluation
+            <Button
+              type="submit"
+              disabled={submitting}
+              className="w-full h-12 bg-secondary hover:bg-secondary-dark text-secondary-foreground font-bold text-base rounded-xl"
+            >
+              {submitting ? "Submitting..." : "Get Free Evaluation"}
             </Button>
 
             <p className="text-center text-xs text-muted-foreground">
